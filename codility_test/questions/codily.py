@@ -81,3 +81,12 @@
 # 3,4,5
 # 3,4,1"""))
 
+def timeConversion(s):
+    # Write your code here
+    am_or_pm = s[-2:]
+    time = s[:-2]
+    time_array = time.split(':')
+    if (time_array[0] == '12' and am_or_pm == 'PM') or (am_or_pm == 'AM' and time_array[0] == '12'):
+        time_array[0] = str((int(time_array[0]) + 12) % 24).zfill(2)
+
+    return ':'.join(time_array)
