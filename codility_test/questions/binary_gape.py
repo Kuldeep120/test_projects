@@ -25,7 +25,7 @@
 
 
 def solution(N):
-    n_bin = bin(N)
+    n_bin = "{:b}".format(N)
     gape = -1
     max_gape = 0
     for i in n_bin:
@@ -34,9 +34,6 @@ def solution(N):
             gape = 0
         else:
             gape += 1
-
-    print(max_gape)
-    # write your code in Python 3.6
     return max_gape
 
 def run():
