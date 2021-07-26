@@ -1,4 +1,5 @@
 from collections import defaultdict
+import math
 def find_max_min(genes, health, strands):
     min_h, max_h = -1, -1
     max_gen = max([len(x) for x in genes])
@@ -53,6 +54,27 @@ def find_max_min_optimized(genes, health, strands):
         max_h = max(max_h, health_amount) if max_h>= 0 else health_amount
     print(min_h, max_h)
 
+def find_min_healt(genes, health, strands):
+    min_h, max_h = math.inf, 0
+    max_gen = max([len(x) for x in genes])
+    for strand in strands:
+        first = strand[0]
+        last = strand[1]
+        d = strand[2]
+        health_amount = 0
+        gmap = defaultdict(lambda: 0)
+        for i, item in enumerate(genes[first: last + 1]):
+            gmap[item] += health[i + first]
+        st_len = len(d)
+        for i in range(len(d)):
+            for j in range(1, max_gen+1):
+                if i+j > st_len: continue
+                sub = d[i:i+j]
+                health_amount += gmap[sub]
+
+        min_h = min(min_h, health_amount)
+        max_h = max(max_h, health_amount)
+    print(min_h, max_h)
 
 def run():
     genes = ['a', 'b', 'c', 'aa', 'd', 'b']
@@ -69,5 +91,5 @@ def run():
         for j in range(1, min(len(gene), 500) + 1): subs.add(gene[:j])
     for v in gMap.values():
         for i, ix in enumerate(v[0]): v[1].append(v[1][i] + health[ix])
-    find_max_min_optimized(genes,health, strands)
+    find_min_healt(genes,health, strands)
 # 0 3063762714

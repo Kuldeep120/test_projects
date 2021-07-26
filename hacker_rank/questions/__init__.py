@@ -3,5 +3,6 @@
 # from . import beautifull_string
 from . import beautifull_binary
 from . import gen_health
+from . import palindrom_index
 
 # from . import *
